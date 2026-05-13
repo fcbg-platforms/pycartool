@@ -147,3 +147,6 @@ dmypy.json
 target/
 test-output.xml
 test.ris
+/doc/_build
+/doc/api/generated
+/doc/generated

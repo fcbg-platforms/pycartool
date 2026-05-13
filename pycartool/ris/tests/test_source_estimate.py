@@ -7,11 +7,11 @@ import os
 import numpy as np
 import pytest
 
-from ...data import data_path
-from ...inv import read_is
-from ...rois import RegionsOfInterest
-from ...spi import SourceSpace
-from ..source_estimate import SourceEstimate, read_ris
+from pycartool.data import data_path
+from pycartool.inv import read_is
+from pycartool.rois import RegionsOfInterest
+from pycartool.spi import SourceSpace
+from pycartool.ris.source_estimate import SourceEstimate, read_ris
 
 
 def generate_source_space(size):

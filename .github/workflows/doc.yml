@@ -28,7 +28,7 @@ jobs:
       - run: uv pip install --quiet --system .[doc]
       - run: make -C doc html
       - name: Prune sphinx environment
-        run: rm -R ./doc/_build/.doctrees
+        run: rm -R ./doc/_build/html/.doctrees
       - uses: actions/upload-artifact@v7
         with:
           name: doc

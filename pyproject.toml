@@ -68,16 +68,17 @@ doc = [
     'sphinx-issues',
 ]
 style = [
-    'black',
-    'codespell',
-    'isort',
-    'flake8',
-    'pydocstyle[toml]',
+  'bibclean',
+  'codespell[toml]>=2.2.4',
+  'pre-commit',
+  'ruff>=0.6.0',
+  'toml-sort',
+  'yamllint',
 ]
 test = [
     'pymatreader',
-    'pytest==7.0.1',
-    'pytest-azurepipelines',
+    'pytest>=8.0',
+    'pytest-timeout',
     'pytest-cov',
 ]
 

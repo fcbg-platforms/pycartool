@@ -33,35 +33,34 @@ def read_sef(filename, verbose=None):
         RawArray containing the EEG signals.
     %(verbose)s
     """
-    f = open(filename, "rb")
-    #   Read fixed part of the headerà
-    version = f.read(4).decode("utf-8")
-    if version != "SE01":
-        print(f"Version : {version} not supported")
-        raise ValueError()
-    (n_channels,) = struct.unpack("I", f.read(4))
-    (num_aux_electrodes,) = struct.unpack("I", f.read(4))  # noqa F841
-    (num_time_frames,) = struct.unpack("I", f.read(4))
-    (sfreq,) = struct.unpack("f", f.read(4))
-    (year,) = struct.unpack("H", f.read(2))
-    (month,) = struct.unpack("H", f.read(2))
-    (day,) = struct.unpack("H", f.read(2))
-    (hour,) = struct.unpack("H", f.read(2))
-    (minute,) = struct.unpack("H", f.read(2))
-    (second,) = struct.unpack("H", f.read(2))
-    (millisecond,) = struct.unpack("H", f.read(2))
+    with open(filename, "rb") as f:
+        #   Read fixed part of the headerà
+        version = f.read(4).decode("utf-8")
+        if version != "SE01":
+            raise ValueError(f"Version : {version} not supported")
+        (n_channels,) = struct.unpack("I", f.read(4))
+        (num_aux_electrodes,) = struct.unpack("I", f.read(4))  # noqa F841
+        (num_time_frames,) = struct.unpack("I", f.read(4))
+        (sfreq,) = struct.unpack("f", f.read(4))
+        (year,) = struct.unpack("H", f.read(2))
+        (month,) = struct.unpack("H", f.read(2))
+        (day,) = struct.unpack("H", f.read(2))
+        (hour,) = struct.unpack("H", f.read(2))
+        (minute,) = struct.unpack("H", f.read(2))
+        (second,) = struct.unpack("H", f.read(2))
+        (millisecond,) = struct.unpack("H", f.read(2))
 
-    #   Read variable part of the header
-    ch_names = []
-    for _ in range(n_channels):
-        name = [char for char in f.read(8).split(b"\x00") if char != b""][0]
-        ch_names.append(name.decode("utf-8").strip())
-    # Read data
-    buffer = np.frombuffer(
-        f.read(n_channels * num_time_frames * 8),
-        dtype=np.float32,
-        count=n_channels * num_time_frames,
-    )
+        #   Read variable part of the header
+        ch_names = []
+        for _ in range(n_channels):
+            name = [char for char in f.read(8).split(b"\x00") if char != b""][0]
+            ch_names.append(name.decode("utf-8").strip())
+        # Read data
+        buffer = np.frombuffer(
+            f.read(n_channels * num_time_frames * 8),
+            dtype=np.float32,
+            count=n_channels * num_time_frames,
+        )
     data = np.reshape(buffer, (num_time_frames, n_channels))
     # Create infos
     description = "Imported with Pycartool"
@@ -98,27 +97,26 @@ def write_sef(filename, raw):
     num_aux_electrodes = n_channels - len(
         mne.pick_types(info, meg=False, eeg=True, exclude=[""])
     )
-    f = open(filename, "wb")
-    f.write("SE01".encode("utf-8"))
-    f.write(struct.pack("I", n_channels))
-    f.write(struct.pack("I", num_aux_electrodes))
-    f.write(struct.pack("I", num_freq_frames))
-    f.write(struct.pack("f", sfreq))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
-    f.write(struct.pack("H", 0))
+    with open(filename, "wb") as f:
+        f.write("SE01".encode("utf-8"))
+        f.write(struct.pack("I", n_channels))
+        f.write(struct.pack("I", num_aux_electrodes))
+        f.write(struct.pack("I", num_freq_frames))
+        f.write(struct.pack("f", sfreq))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
+        f.write(struct.pack("H", 0))
 
-    ch_names = info["ch_names"]
-    for k in range(n_channels):
-        ch_name = ch_names[k]
-        ch_name = ch_name.ljust(8)
-        f.write(ch_name.encode("utf-8"))
+        ch_names = info["ch_names"]
+        for k in range(n_channels):
+            ch_name = ch_names[k]
+            ch_name = ch_name.ljust(8)
+            f.write(ch_name.encode("utf-8"))
 
-    data = raw.get_data().astype(np.float32)
-    data = np.reshape(data, n_channels * num_freq_frames, order="F")
-    data.tofile(f)
-    f.close()
+        data = raw.get_data().astype(np.float32)
+        data = np.reshape(data, n_channels * num_freq_frames, order="F")
+        data.tofile(f)

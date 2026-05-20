@@ -97,7 +97,7 @@ def read_ris(filename, source_space=None, subject=None, verbose=None):
             subject=subject,
             filename=filename,
         )
-        return source_estimate
+    return source_estimate
 
 
 def write_ris(source_estimate, filename):
@@ -128,19 +128,18 @@ def write_ris(source_estimate, filename):
     ris_type = "RI01"
     n_timeframes = data.shape[0]
     n_solutionpoints = data.shape[2]
-    f = open(filename, "wb")
-    f.write(ris_type.encode("utf-8"))
-    f.write(struct.pack("I", n_solutionpoints))
-    f.write(struct.pack("I", n_timeframes))
-    f.write(struct.pack("f", sfreq))
-    f.write(struct.pack("c", isinversescalar))
-    if isinversescalar == b"\x00":
-        data = np.swapaxes(data, 1, 2)
-    else:
-        data = np.swapaxes(data, 0, 1)
-    data = data.astype(np.float32)
-    data.tofile(f)
-    f.close()
+    with open(filename, "wb") as f:
+        f.write(ris_type.encode("utf-8"))
+        f.write(struct.pack("I", n_solutionpoints))
+        f.write(struct.pack("I", n_timeframes))
+        f.write(struct.pack("f", sfreq))
+        f.write(struct.pack("c", isinversescalar))
+        if isinversescalar == b"\x00":
+            data = np.swapaxes(data, 1, 2)
+        else:
+            data = np.swapaxes(data, 0, 1)
+        data = data.astype(np.float32)
+        data.tofile(f)
 
 
 class SourceEstimate(object):

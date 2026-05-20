@@ -34,6 +34,25 @@ jobs:
           name: doc
           path: ./doc/_build/html
 
+  deploy-preview:
+    if: github.event_name == 'pull_request'
+    needs: build
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: doc
+          path: ./doc
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./doc
+
   deploy-push:
     if: github.event_name == 'push'
     needs: build
@@ -54,7 +73,7 @@ jobs:
           git-config-name: 'github-actions[bot]'
           git-config-email: 'github-actions[bot]@users.noreply.github.com'
           single-commit: false
-          force: true
+          force: false
 
   deploy-release:
     if: github.event_name == 'release'
@@ -76,7 +95,7 @@ jobs:
           git-config-name: 'github-actions[bot]'
           git-config-email: 'github-actions[bot]@users.noreply.github.com'
           single-commit: false
-          force: true
+          force: false
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: ./doc
@@ -84,4 +103,4 @@ jobs:
           git-config-name: 'github-actions[bot]'
           git-config-email: 'github-actions[bot]@users.noreply.github.com'
           single-commit: false
-          force: true
+          force: false

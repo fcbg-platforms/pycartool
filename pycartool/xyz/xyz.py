@@ -21,7 +21,8 @@ def read_xyz(filename):
     montage : `~mne.channels.DigMontage`
         Montage for EEG electrode locations.
     """
-    n = int(open(filename).readline().lstrip().split(" ")[0])
+    with open(filename, "r") as f:
+        n = int(f.readline().lstrip().split(" ")[0])
     coord = (
         np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n) / 1e3
     )

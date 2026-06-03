@@ -92,7 +92,7 @@ test = [
 
 [project.urls]
 homepage = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
-documentation = 'https://pycartool.readthedocs.io/en/main/'
+documentation = 'https://functional-brain-mapping-laboratory.github.io/PyCartool'
 source = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
 tracker = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool/issues'
 

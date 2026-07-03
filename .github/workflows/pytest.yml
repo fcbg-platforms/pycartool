@@ -35,9 +35,12 @@ jobs:
       - run: pytest pycartool --cov=pycartool --cov-report=xml --cov-config=pyproject.toml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v7
+        env:
+          OS: ${{ matrix.os }}
+          PYTHON_VERSION: ${{ matrix.python-version }}
         with:
           directory: ./coverage/reports/
-          env_vars: os, python-version
+          env_vars: OS,PYTHON_VERSION
           fail_ci_if_error: true
           files: ./coverage1.xml,./coverage2.xml,!./cache
           flags: unittests

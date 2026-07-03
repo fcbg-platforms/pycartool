@@ -13,6 +13,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+_version.py
 .Python
 build/
 develop-eggs/
@@ -147,3 +148,6 @@ dmypy.json
 target/
 test-output.xml
 test.ris
+/doc/_build
+/doc/api/generated
+/doc/generated

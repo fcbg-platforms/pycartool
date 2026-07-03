@@ -1,21 +1,34 @@
 [build-system]
-requires = ['setuptools >= 61.0.0']
 build-backend = 'setuptools.build_meta'
+requires = ['setuptools >= 64.0.0', 'setuptools_scm>=8']
 
 [project]
-name = 'pycartool'
-version = '0.0.1-dev'
-description = "A simple open source Python package for I/O between Cartool and MNE ( and more generally python)"
-readme = 'README.md'
-license = {file = 'LICENSE'}
-requires-python = '>=3.7'
 authors = [
     {name = 'Victor Férat', email = 'victor.ferat@live.fr'},
     {name = 'Tanguy Vivier'}
 ]
-maintainers = [
-    {name = 'Victor Férat', email = 'victor.ferat@live.fr'},
+classifiers = [
+    'Natural Language :: English',
+    'Operating System :: MacOS',
+    'Operating System :: Microsoft :: Windows',
+    'Operating System :: Unix',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'License :: OSI Approved :: BSD License',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering',
 ]
+dependencies = [
+    'numpy>=1.23,<3',
+    'mne>=1.9.0',
+    'packaging',
+    'psutil',
+]
+description = "A simple open source Python package for I/O between Cartool and MNE ( and more generally python)"
+dynamic = ["version"]
 keywords = [
     'python',
     'neuroscience',
@@ -23,115 +36,137 @@ keywords = [
     'eeg',
     'brain',
 ]
-classifiers = [
-    'Operating System :: Microsoft :: Windows',
-    'Operating System :: Unix',
-    'Operating System :: MacOS',
-    'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
-    'Programming Language :: Python :: 3.10',
-    'Natural Language :: English',
-    'License :: OSI Approved :: BSD License',
-    'Intended Audience :: Science/Research',
-    'Topic :: Scientific/Engineering',
+maintainers = [
+    {name = 'Victor Férat', email = 'victor.ferat@live.fr'},
 ]
-dependencies = [
-    'numpy>=1.21',
-    'scipy',
-    'mne>=1.0.0',
-    'decorator',
-    'jinja2',
-    'importlib-metadata; python_version < "3.8"',
-    'importlib-resources; python_version < "3.9"',
-]
+name = 'pycartool'
+readme = 'README.md'
+license = {file = 'LICENSE'}
+requires-python = '>=3.10'
 
 [project.optional-dependencies]
-build = ['build', 'twine']
-docs = [
-    'memory-profiler',
-    'numpydoc',
-    'pandas',
-    'pydata-sphinx-theme',
-    'sphinx',
-    'sphinxcontrib-bibtex',
-    'sphinx-copybutton',
-    'sphinx-design',
-    'sphinx_gallery',
-    'sphinx-issues',
+all = [
+  'pycartool[build]',
+  'pycartool[doc]',
+  'pycartool[style]',
+  'pycartool[test]',
+]
+build = [
+    'build', 
+    'twine'
+]
+doc = [
+  'intersphinx_registry',
+  'ipyevents',
+  'ipywidgets',
+  'matplotlib',
+  'memory-profiler',
+  'myst_parser',
+  'nilearn',
+  'numpydoc',
+  'pydata_sphinx_theme',
+  'PyQt5',
+  'pyvistaqt',
+  'sphinx',
+  'sphinx-copybutton',
+  'sphinx-design',
+  'sphinx-gallery',
+  'sphinx-issues',
+  'sphinxcontrib-bibtex',
+  'pandas',
 ]
 style = [
-    'black',
-    'codespell',
-    'isort',
-    'flake8',
-    'pydocstyle[toml]',
+  'bibclean',
+  'codespell[toml]>=2.2.4',
+  'pre-commit',
+  'ruff>=0.6.0',
+  'toml-sort',
+  'yamllint',
 ]
 test = [
     'pymatreader',
-    'pytest==7.0.1',
-    'pytest-azurepipelines',
+    'pytest>=8.0',
+    'pytest-timeout',
     'pytest-cov',
-]
-all = [
-    'pycartool[build]',
-    'pycartool[docs]',
-    'pycartool[style]',
-    'pycartool[test]',
 ]
 
 [project.urls]
-homepage = 'https://pycartool.readthedocs.io/en/main/'
-documentation = 'https://pycartool.readthedocs.io/en/main/'
-source = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
-tracker = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool/issues'
+homepage = 'https://github.com//fcbg-platforms/pycartool'
+documentation = 'https://fcbg-platforms.github.io/pycartool'
+source = 'https://github.com/fcbg-platforms/pycartool'
+tracker = 'https://github.com/fcbg-platforms/yycartool/issues'
 
-[tool.setuptools]
-include-package-data = false
 
-[tool.setuptools.packages.find]
-include = ['pycartool*']
-exclude = ['pycartool*tests']
+[tool.codespell]
+check-filenames = true
+check-hidden = true
+ignore-words = '.codespellignore'
+skip = 'build,.git,.mypy_cache,.pytest_cache,.venv'
 
-[tool.setuptools.package-data]
-"pycartool.html_templates" = ["repr/*.jinja"]
-
-[tool.black]
-line-length = 79
-target-version = ['py37']
-include = '\.pyi?$'
-extend-exclude = '''
-(
-      __pycache__
-    | \.github
-    | setup.py
-    | docs/
-    | tutorials/
-    | pycrostates/html_templates/repr
-)
-'''
-
-[tool.isort]
-profile = 'black'
-multi_line_output = 3
-line_length = 79
-py_version = 37
-extend_skip_glob = [
-    'setup.py',
-    'docs/*',
-    'tutorials/*',
-    'pycartool/html_templates/repr/*'
+[tool.coverage.report]
+exclude_lines = [
+  'if __name__ == .__main__.:',
+  'if TYPE_CHECKING:',
+  'pragma: no cover',
 ]
+precision = 2
 
-[tool.pydocstyle]
-convention = 'numpy'
-ignore-decorators= '(copy_doc|property|.*setter|.*getter)'
-match = '^(?!setup|__init__|test_).*\.py'
-match-dir = '^(?!docs|tutorials|build|dist|\.).*'
-add_ignore = 'D100,D104,D107'
+[tool.coverage.run]
+branch = true
+cover_pylib = false
+omit = [
+  '**/__init__.py',
+  '**/conftest.py',
+  '**/pycartool/_version.py',
+  '**/pycartool/utils/_fixes.py',
+  '**/tests/**',
+]
 
 [tool.pytest.ini_options]
-filterwarnings = [
-    "ignore:Matplotlib is currently using agg:UserWarning",
+addopts = ['--color=yes', '--cov-report=', '--durations=20', '--junit-xml=junit-results.xml', '--strict-config', '--tb=short', '-ra', '-v']
+junit_family = 'xunit2'
+minversion = '8.0'
+
+[tool.ruff]
+extend-exclude = []
+line-length = 88
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+
+[tool.ruff.lint]
+ignore = []
+select = ['A', 'B', 'D', 'E', 'F', 'G', 'I', 'LOG', 'NPY', 'PIE', 'PT', 'T20', 'UP', 'W']
+
+[tool.ruff.lint.per-file-ignores]
+'*' = [
+  'B904',  # 'Within an except clause, raise exceptions with raise ... from ...'
+  'D100',  # 'Missing docstring in public module'
+  'D104',  # 'Missing docstring in public package'
+  'D107',  # 'Missing docstring in __init__'
 ]
+'*.pyi' = ['E501']
+'__init__.py' = ['F401']
+'tutorials/*' = ['D205', 'D400', 'T201']
+
+[tool.ruff.lint.pydocstyle]
+convention = 'numpy'
+ignore-decorators = ["pycartool.utils._docs.copy_doc"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ['pycartool*tests']
+include = ['pycartool*']
+
+[tool.setuptools_scm]
+version_file = "pycartool/_version.py"
+version_scheme = "release-branch-semver"
+
+[tool.tomlsort]
+all = true
+ignore_case = true
+spaces_before_inline_comment = 2
+trailing_comma_inline_array = true

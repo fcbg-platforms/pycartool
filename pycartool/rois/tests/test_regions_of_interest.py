@@ -5,8 +5,8 @@
 
 import os
 
-from ...data import data_path
-from ..regions_of_interest import read_roi
+from pycartool.data import data_path
+from pycartool.rois.regions_of_interest import read_roi
 
 
 def test_read_roi():

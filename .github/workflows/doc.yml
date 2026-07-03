@@ -1,0 +1,106 @@
+name: doc
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}-${{ github.event.ref }}
+  cancel-in-progress: true
+on:  # yamllint disable-line rule:truthy
+  pull_request:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sudo apt update
+          sudo apt install -y \
+            optipng \
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.11
+      - uses: astral-sh/setup-uv@v7
+      - run: uv pip install --quiet --system .[doc]
+      - run: make -C doc html
+      - name: Prune sphinx environment
+        run: rm -R ./doc/_build/html/.doctrees
+      - uses: actions/upload-artifact@v7
+        with:
+          name: doc
+          path: ./doc/_build/html
+
+  deploy-preview:
+    if: github.event_name == 'pull_request'
+    needs: build
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: doc
+          path: ./doc
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./doc
+
+  deploy-push:
+    if: github.event_name == 'push'
+    needs: build
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: doc
+          path: ./doc
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./doc
+          target-folder: dev
+          git-config-name: 'github-actions[bot]'
+          git-config-email: 'github-actions[bot]@users.noreply.github.com'
+          single-commit: false
+          force: false
+
+  deploy-release:
+    if: github.event_name == 'release'
+    needs: build
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v8
+        with:
+          name: doc
+          path: ./doc
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./doc
+          target-folder: ${{ github.event.release.tag_name }}
+          git-config-name: 'github-actions[bot]'
+          git-config-email: 'github-actions[bot]@users.noreply.github.com'
+          single-commit: false
+          force: false
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./doc
+          target-folder: latest
+          git-config-name: 'github-actions[bot]'
+          git-config-email: 'github-actions[bot]@users.noreply.github.com'
+          single-commit: false
+          force: false

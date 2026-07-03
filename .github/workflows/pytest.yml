@@ -32,14 +32,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v7
       - run: uv pip install --quiet --system .[test]
-      - run: pytest pycartool --cov=pycartool --cov-report=xml --cov-config=pyproject.toml
-      - uses: codecov/codecov-action@v6
+      - run: pytest pycartool --cov=pycartool --cov --junitxml=junit.xml -o junit_family=legacy --cov-config=pyproject.toml
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
-          files: ./coverage.xml
-          flags: unittests  # optional
-          name: codecov-umbrella  # optional
           token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true  # optional (default = false)
 
   pytest-pip-pre:
     timeout-minutes: 30
@@ -62,10 +60,3 @@ jobs:
           uv pip install --quiet --system .[test]
           uv pip install --quiet --system --upgrade --prerelease allow --only-binary :all: -i https://pypi.anaconda.org/scientific-python-nightly-wheels/simple numpy
       - run: pytest pycartool --cov=pycartool --cov-report=xml --cov-config=pyproject.toml
-      - uses: codecov/codecov-action@v6
-        with:
-          files: ./coverage.xml
-          flags: unittests  # optional
-          name: codecov-umbrella  # optional
-          token: ${{ secrets.CODECOV_TOKEN }}
-          verbose: true  # optional (default = false)

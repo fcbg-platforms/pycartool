@@ -260,7 +260,12 @@ def linkcode_resolve(domain: str, info: dict[str, str]) -> str | None:
         branch = "main"
     else:
         return None  # alternatively, link to a maint/version branch
-    fname = fname.rsplit(f"/{package}/")[1]
+    package_anchor = f"/{package}/"
+    if package_anchor not in fname:
+        # Skip objects implemented outside this package (e.g. inherited methods).
+        return None
+
+    fname = fname.split(package_anchor, 1)[1]
     url = f"{gh_url}/blob/{branch}/{package}/{fname}#{lines}"
     return url
 

@@ -1,7 +1,7 @@
-PyCartool
+pycartool
 =========
 
-PyCartool is a simple open source Python package which provides I/O for most Cartool :footcite:t:`brunet2011spatiotemporal`. file formats as well as additional computing
+pycartool is a simple open source Python package which provides I/O for most Cartool :footcite:t:`brunet2011spatiotemporal`. file formats as well as additional computing
 features.
 
 References

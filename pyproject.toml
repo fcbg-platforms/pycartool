@@ -91,10 +91,10 @@ test = [
 ]
 
 [project.urls]
-homepage = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
-documentation = 'https://functional-brain-mapping-laboratory.github.io/PyCartool'
-source = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool'
-tracker = 'https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool/issues'
+homepage = 'https://github.com//fcbg-platforms/pycartool'
+documentation = 'https://fcbg-platforms.github.io/pycartool'
+source = 'https://github.com/fcbg-platforms/pycartool'
+tracker = 'https://github.com/fcbg-platforms/yycartool/issues'
 
 
 [tool.codespell]

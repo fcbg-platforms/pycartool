@@ -27,12 +27,12 @@ import pycartool
 # -- project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "PyCartool"
+project = "pycartool"
 author = "Victor Férat / Tanguy Vivier"
 copyright = f"{date.today().year}, {author}"
 release = pycartool.__version__
 package = pycartool.__name__
-gh_url = "https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool"
+gh_url = "https://github.com/fcbg-platforms/pycartool"
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

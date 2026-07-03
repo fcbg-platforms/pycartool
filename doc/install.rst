@@ -21,4 +21,4 @@ To install the latest development version, run:
 
 .. code-block:: bash
 
-    $ pip install git+https://github.com/Functional-Brain-Mapping-Laboratory/PyCartool
+    $ pip install git+https://github.com/fcbg-platforms/pycartool

@@ -11,6 +11,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import sys
+import inspect
 import subprocess
 from datetime import date
 from importlib import import_module
@@ -33,6 +34,7 @@ copyright = f"{date.today().year}, {author}"
 release = pycartool.__version__
 package = pycartool.__name__
 gh_url = "https://github.com/fcbg-platforms/pycartool"
+gh_pages_url = "https://fcbg-platforms.github.io/pycartool/"
 
 # -- general configuration -------------------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -90,10 +92,18 @@ html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 html_title = project
 
+# Documentation to change footer icons:
+# https://pradyunsg.me/furo/customisation/footer/#changing-footer-icons
+version_match = "dev" if "dev" in release else release
 
 # -- options for HTML output -------------------------------------------------
 html_theme = "pydata_sphinx_theme"
 html_theme_options = {
+    "switcher": {
+        "json_url": f"{gh_pages_url}dev/_static/switcher.json",
+        "version_match": version_match,
+    },
+    "navbar_end": ["theme-switcher", "version-switcher"],
     "icon_links": [
         {
             "name": "GitHub",

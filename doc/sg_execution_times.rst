@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**01:47.629** total execution time for 1 file **from all galleries**:
+**00:51.920** total execution time for 1 file **from all galleries**:
 
 .. container::
 
@@ -33,5 +33,5 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_generated_tutorials_00_plot_svd.py` (``..\tutorials\00_plot_svd.py``)
-     - 01:47.629
-     - 684.5
+     - 00:51.920
+     - 679.3

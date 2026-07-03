@@ -6,8 +6,8 @@ import os
 
 from mne.channels import DigMontage
 
-from ...data import data_path
-from ..xyz import read_xyz
+from pycartool.data import data_path
+from pycartool.xyz import read_xyz
 
 
 def test_read_xyz():

@@ -5,8 +5,8 @@
 
 import os
 
-from ...data import data_path
-from ..sef import read_sef, write_sef
+from pycartool.data import data_path
+from pycartool.sef import read_sef, write_sef
 
 datasef = os.path.join(data_path, "sample-sef.sef")
 

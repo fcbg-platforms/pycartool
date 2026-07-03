@@ -6,8 +6,8 @@ import os
 
 import numpy as np
 
-from ...data import data_path
-from ..source_space import SourceSpace, read_spi, write_spi
+from pycartool.data import data_path
+from pycartool.spi.source_space import SourceSpace, read_spi, write_spi
 
 
 def test_read_spi():

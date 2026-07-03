@@ -108,6 +108,8 @@ def read_is(filename, verbose=None):
                 numregularizations, numsolutionpoints, n_dim, n_channels
             )
             data = np.swapaxes(data, 1, 2)
+        else:
+            raise ValueError(f"IS type {is_type} not supported")
 
     regularisation_solutions = np.array(regularisation_solutions)
     inverse_solution = {

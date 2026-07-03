@@ -34,7 +34,7 @@ jobs:
       - run: uv pip install --quiet --system .[test]
       - run: pytest pycartool --cov=pycartool --cov-report=xml --cov-config=pyproject.toml
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           directory: ./coverage/reports/
           env_vars: os, python-version

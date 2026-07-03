@@ -1,7 +1,6 @@
 [![Latest PyPI Release](https://img.shields.io/pypi/v/pycartool.svg)](https://pypi.org/project/pycartool/)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pycartool.svg)](https://pypi.python.org/pypi/pycartool/)
-[![Build Status](https://dev.azure.com/vferat/pycartool/_apis/build/status/fcbg-platforms.pycartool?branchName=main)](https://dev.azure.com/vferat/pycartool/_build/latest?definitionId=5&branchName=main)
-[![codecov](https://codecov.io/gh/fcbg-platforms/PyCartool/branch/master/graph/badge.svg?token=3TeUfaAmXd)](https://codecov.io/gh/fcbg-platforms/pycartool)
+[![codecov](https://codecov.io/gh/fcbg-platforms/pycartool/graph/badge.svg?token=F9R8HmyTJq)](https://codecov.io/gh/fcbg-platforms/pycartool)
 ![License](https://img.shields.io/badge/license-BSD-green.svg)
 
 # PyCartool

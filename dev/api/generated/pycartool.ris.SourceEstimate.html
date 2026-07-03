@@ -45,7 +45,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
-    <script src="../../_static/documentation_options.js?v=1be0d999"></script>
+    <script src="../../_static/documentation_options.js?v=91e16883"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -56,7 +56,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://fcbg-platforms.github.io/pycartool/dev/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.2.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             false;
         </script>
@@ -486,7 +486,7 @@
 <h1>pycartool.ris.SourceEstimate<a class="headerlink" href="#pycartool-ris-sourceestimate" title="Link to this heading">🔗</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="pycartool.ris.SourceEstimate">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pycartool.ris.</span></span><span class="sig-name descname"><span class="pre">SourceEstimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources_tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfreq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycartool.ris.SourceEstimate" title="Link to this definition">🔗</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pycartool.ris.</span></span><span class="sig-name descname"><span class="pre">SourceEstimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sources_tc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfreq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/fcbg-platforms/pycartool/blob/main/pycartool/ris/source_estimate.py#L145-L351"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycartool.ris.SourceEstimate" title="Link to this definition">🔗</a></dt>
 <dd><p>Container for source estimate data.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -550,7 +550,7 @@ shape (<code class="docutils literal notranslate"><span class="pre">n_solution_p
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="pycartool.ris.SourceEstimate.compute_rois_tc">
-<span class="sig-name descname"><span class="pre">compute_rois_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_of_interest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'svd'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycartool.ris.SourceEstimate.compute_rois_tc" title="Link to this definition">🔗</a></dt>
+<span class="sig-name descname"><span class="pre">compute_rois_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_of_interest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'svd'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/fcbg-platforms/pycartool/blob/main/pycartool/ris/source_estimate.py#L319-L351"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycartool.ris.SourceEstimate.compute_rois_tc" title="Link to this definition">🔗</a></dt>
 <dd><p>Compute time course in Region of interest.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -574,7 +574,7 @@ of interest.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pycartool.ris.SourceEstimate.compute_tc">
-<span class="sig-name descname"><span class="pre">compute_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'svd'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycartool.ris.SourceEstimate.compute_tc" title="Link to this definition">🔗</a></dt>
+<span class="sig-name descname"><span class="pre">compute_tc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'svd'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/fcbg-platforms/pycartool/blob/main/pycartool/ris/source_estimate.py#L286-L317"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycartool.ris.SourceEstimate.compute_tc" title="Link to this definition">🔗</a></dt>
 <dd><p>Compute time course.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -597,7 +597,7 @@ shape(<code class="docutils literal notranslate"><span class="pre">n_dim</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pycartool.ris.SourceEstimate.per_roi">
-<span class="sig-name descname"><span class="pre">per_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_of_interest</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycartool.ris.SourceEstimate.per_roi" title="Link to this definition">🔗</a></dt>
+<span class="sig-name descname"><span class="pre">per_roi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region_of_interest</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/fcbg-platforms/pycartool/blob/main/pycartool/ris/source_estimate.py#L243-L284"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycartool.ris.SourceEstimate.per_roi" title="Link to this definition">🔗</a></dt>
 <dd><p>Get source in specific rois.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -618,7 +618,7 @@ interest.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pycartool.ris.SourceEstimate.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_spi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pycartool.ris.SourceEstimate.save" title="Link to this definition">🔗</a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_spi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/fcbg-platforms/pycartool/blob/main/pycartool/ris/source_estimate.py#L223-L241"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pycartool.ris.SourceEstimate.save" title="Link to this definition">🔗</a></dt>
 <dd><p>Write SourceEstimate to Cartool ris file.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>

@@ -8,13 +8,17 @@ import numpy as np
 from mne.channels import make_dig_montage
 
 
-def read_xyz(filename):
+def read_xyz(filename, units="mm"):
     """Read and convert ``.xyz`` positions to a `~mne.channels.DigMontage`.
 
     Parameters
     ----------
     filename : str
         The filename of the ``.xyz`` file.
+    units : str
+        The units of the coordinates in the file. Can be 'm' for meters,
+        'cm' for centimeters, or 'mm' for millimeters. Cartool usually uses millimeters.
+        Default is 'mm'.
 
     Returns
     -------
@@ -24,7 +28,7 @@ def read_xyz(filename):
     with open(filename, "r") as f:
         n = int(f.readline().lstrip().split(" ")[0])
     coord = (
-        np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n) / 1e3
+        np.loadtxt(filename, skiprows=1, usecols=(0, 1, 2), max_rows=n)
     )
     names = np.loadtxt(
         filename, skiprows=1, usecols=3, max_rows=n, dtype=np.dtype(str)
@@ -32,7 +36,13 @@ def read_xyz(filename):
     names = names.tolist()
     ch_pos = dict()
     for i, name in enumerate(names):
-        ch_pos[name] = coord[i] / 1000
+        if units == "mm":
+            coord[i] *= 1e-3
+        elif units == "cm":
+            coord[i] *= 1e-2
+        elif units == "m":
+            coord[i] *= 1
+        ch_pos[name] = coord[i]
     montage = make_dig_montage(ch_pos=ch_pos, coord_frame="head")
     return montage
 
@@ -58,3 +68,4 @@ def write_xyz(filename, info):
                     pos[e][0], pos[e][1], pos[e][2], elec
                 )
             )
+    return

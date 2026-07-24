@@ -40,7 +40,7 @@ jobs:
           files: ./coverage.xml
           flags: unittests
           name: codecov-umbrella
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: dbe335b8-9280-443a-ae4c-558675fde4a5
           verbose: true
 
   pytest-pip-pre:
